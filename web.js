@@ -37,7 +37,7 @@ app.get('/collection/devices/',routes.getDevices);
 app.post('/collection/devices/',routes.addDevice);
 app.post('/model/client/new',routes.clientnew);
 app.post('/model/device/new',routes.devicenew);
-
-app.listen(3000, function(){
+var port = process.env.PORT || 3000;
+app.listen(port, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
