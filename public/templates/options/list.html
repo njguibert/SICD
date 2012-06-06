@@ -1,0 +1,7 @@
+<% _.each(options, function(o) { %>
+ <li><a href=
+ 	<% print("'#"+o.get("url")+"'"); %>
+ 	>
+ 	<% print(o.get("nombre")); %>
+ 	</a></li> 
+ <% }); %>

@@ -1,0 +1,22 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+#map_canvas { height: 300px;width:300px;}
+#map_canvasclientes{ height: 400px;width:500px;}
+a {
+  color: #00B7FF;
+}
+#page {height:400px;background-image: url("../img/grid-18px-masked.png");}
+
+#frmpluslist{
+	overflow-y: auto;height:100px;
+}
+#listdevices{
+	overflow-y: auto;height:150px;
+}
+#frmnuevodevice form{
+	overflow-y: auto;
+}
+
+

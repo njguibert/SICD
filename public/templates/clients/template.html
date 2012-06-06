@@ -1,0 +1,25 @@
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDAPt2sOB0JtlQgTO6crlJiIklSrpS150Q&sensor=false" />
+<h1> Area Clientes </h1>
+  <br>
+  <div id='contenido'>
+    <div id='frmnuevocliente' class='modal hide fade in'>
+    </div>
+    <a href='#frmnuevocliente' data-toggle='modal' id='aaa'> <i class='icon-file'></i>Nuevo Cliente</a>
+    <div class='span10'>
+      <label style='padding-top:10px'> Tus Clientes: </label>
+    </div>  
+    <div class='span10'>
+      <div class='span3'><div id='listclientes'>
+            <% _.each(clients, function(c) { %>
+       <li><a href=
+        <% print("'#"+c.get("nombre")+"'"); %>
+        >
+        <% print(c.get("nombre")); %>
+        </a></li> 
+       <% }); %>
+
+
+      </div></div>
+      <div class='span5'><div id='map_canvasclientes'></div></div>
+    </div>      
+  </div>

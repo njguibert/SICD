@@ -1,0 +1,6 @@
+<table class="table table-striped">
+	<tr><th>Nombre</th><th>Acciones</th></tr>
+  <% _.each(devices, function(device){ %>
+   <tr><td><% print(device.get("nombre")); %></td><td>Eliminar</td><td>Modificar</td></tr>
+  <% }); %>
+</table>
