@@ -50,6 +50,9 @@ define([
         self.render();
         }
       });
+    },
+    removebind:function(){
+      this.plusForm.removebind();
     }
   });
   //Vista del Formulario Nuevo Caracteristicas
@@ -62,7 +65,6 @@ define([
       this.plus=plusCollection;
       this.plus.reset();
       this.plus.bind('add',this.renderone);
-      alert("initialize");
     },
     render:function(){
       self=this;
@@ -72,7 +74,6 @@ define([
       },this);
     },
     renderone:function(p){
-      alert("renderone");
       var pluVista=new PlusView({model:p});
       $('#olcaracteristicas',this.el).append(pluVista.render().el);
     },
@@ -80,6 +81,9 @@ define([
       var p =new plusModel();
       p.set({nombre:$('#newplusNombre').val(),valor:$('#newplusValor').val()});
       this.plus.add(p);
+    },
+    removebind:function(){
+    this.plus.unbind('add',this.renderone);
     },
     getplus:function(){
       this.plus.unbind('add',this.renderone);

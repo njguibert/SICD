@@ -22,8 +22,9 @@ define([
       deviceForm.render();
       $('#frmnuevodispositivo').modal();
       $('#frmnuevodispositivo').on('hidden', function () {
-        alert("se cerro");
-        deviceForm.destroy();
+        //alert("se cerro");
+        $('#frmnuevodispositivo').unbind('hidden');
+        deviceForm.removebind();
       });
     },
     render:function(){
