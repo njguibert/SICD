@@ -9,7 +9,8 @@ define([
 			schema:{
 				nombre: 	'Text',
 				descripcion: 	'Text',
-			},			
+				//caracteristicas:      { type: 'List' },
+			}	
 		});
 		return devicesModel;
 	});

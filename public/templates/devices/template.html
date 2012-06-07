@@ -1,9 +1,11 @@
 <h1> Dispositivos <small>Construccion</small></h1>
 <br>
   <div id='contenido'>
-    <div id='frmnuevodispositivo' class='modal fade in'>
+    <div id='frmnuevodispositivo' class='modal hide fade in'>
     </div>
-    <a href='#frmnuevodispositivo' data-toggle='modal'> <i class='icon-file'></i>Nuevo Dispositivo</a>
+    <div id='frmeditardispositivo' class='modal hide fade in'>
+    </div>    
+    <a href='#frmnuevodispositivo' id='frmnuevo' > <i class='icon-file'></i>Nuevo Dispositivo</a>
 
     <div class='span10'>
       <form class="well form-search">
@@ -12,6 +14,6 @@
         <input type="text" class="input-medium search-query" placeholder='Nombre de un dispositivo'>
         <a href="#/devices/find" id="find" class="btn">Buscar</a>
       </form>
-      <div id='listdevices'></div>
+      <div id='listdevices'><h2>Listado</h2><table class="table table-striped" id='listdevicetable'><tr><th>Nombre</th></tr></table></div>
     </div>  
   </div>

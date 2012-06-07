@@ -7,7 +7,6 @@ define([
   'views/clients/list',
   'bootstrap',
 ], function(mainHomeView,deviceMainView,deviceNewView,optionListView,clientListView){
-//], function(){
     var AppRouter = Backbone.Router.extend({
       routes:{
         '': 'loadpage',
@@ -32,7 +31,7 @@ define([
           deviceMainView.render();
         },
         newDevices:function(){
-          deviceNewView.render();
+          //deviceNewView.render();
         },
         defaultAction:function(actions){
           //mainHomeView.render();

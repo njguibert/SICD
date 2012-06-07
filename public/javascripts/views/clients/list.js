@@ -5,15 +5,13 @@ define([
   'text!templates/clients/list.html',
   'text!templates/forms/modalfade.html',
   'views/map/map',
-  'backboneforms',
+  'libs/backbone/backbone-forms.amd',
   'async!http://maps.googleapis.com/maps/api/js?key=AIzaSyDAPt2sOB0JtlQgTO6crlJiIklSrpS150Q&sensor=false',
-  //'bootstrap-modal',
-  //'bootstrap',
-],function(clientsCollection,clientModel,clientsTemplate,clientsListTemplate,formTemplate,mapView){
+],function(clientsCollection,clientModel,clientsTemplate,clientsListTemplate,formTemplate,mapView,bf){
       var cliente = new clientModel();
       var formView = Backbone.View.extend({
         render: function(){
-          var form = new Backbone.Form({
+          var form = new bf({
             model:cliente
           }).render();
           $(this.el).append(form.el);

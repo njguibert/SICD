@@ -1,21 +1,22 @@
 require.config({
-	waitSeconds : 15,
+	//waitSeconds: 15,
 	paths:{
       text: 'libs/require/text',
       async: 'libs/require/async',
       templates: '../templates',
-      backboneforms: 'libs/backbone/backbone-forms',
       bootstrap:'libs/bootstrap/bootstrap',
       'bootstrap-modal':'libs/bootstrap/bootstrap-modal',
-      //google: 'libs/google',
+      jquery:'libs/jquery/jquery-min',
+      underscore:'libs/underscore/underscore',
+      Backbone:'libs/backbone/backbone',
 	}
 });
 
 require([
-	'libs/jquery/jquery-min',
-	'libs/underscore/underscore-min',
-	'libs/backbone/backbone-min',
-	'app'
+	'order!jquery',
+	'order!underscore',
+	'order!Backbone',
+	'order!app'
 ], function($,_,Backbone,App) {
 		App.initialize();
 });

@@ -1,4 +1,5 @@
 define([
+  'libs/backbone/backbone-forms.amd',
   'models/plus',
   'models/devices',
   'collections/devices',
@@ -6,7 +7,8 @@ define([
   'text!templates/devices/new.html',
   'text!templates/forms/modalfade.html',
   'views/devices/plus',
-],function(plusModel,devicesModel,devicesCollection,plusCollection,devicenewTemplate,formTemplate,PlusView){
+  
+],function(bf,plusModel,devicesModel,devicesCollection,plusCollection,devicenewTemplate,formTemplate,PlusView){
   //Vista del Formulario Nuevo Dispositivo
   var deviceNewView=Backbone.View.extend({
     el: "#frmnuevodispositivo",
@@ -28,7 +30,7 @@ define([
       $('.modal-body').html(formcompiledTemplateDATA);
       $('.modal-footer').append("<a href='#device/new' class='btn btn-primary' id='newdevice'> Guardar </a>");      
     this.device = new devicesModel();
-    this.form = new Backbone.Form({   //Fomulario formado por los atributos schemas del objeto
+    this.form = new bf({   //Fomulario formado por los atributos schemas del objeto
               model:this.device
     }).render();
     $("#frmnuevodevice").html(this.form.el); //Agrego el objeto a fomularizar 
@@ -60,6 +62,7 @@ define([
       this.plus=plusCollection;
       this.plus.reset();
       this.plus.bind('add',this.renderone);
+      alert("initialize");
     },
     render:function(){
       self=this;
@@ -69,6 +72,7 @@ define([
       },this);
     },
     renderone:function(p){
+      alert("renderone");
       var pluVista=new PlusView({model:p});
       $('#olcaracteristicas',this.el).append(pluVista.render().el);
     },
@@ -82,5 +86,6 @@ define([
       return this.plus;
     }
   });
+
   return deviceNewView;
 });
