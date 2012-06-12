@@ -32,6 +32,8 @@ define([
     },
     deleteDevice:function(){
       alert("Elimino el dispositivo:" + this.model.get("nombre"));
+       this.remove();
+
     }
   });  
   //Vista Item dispositivo

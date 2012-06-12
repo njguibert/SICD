@@ -1,6 +1,9 @@
-;(function() {
+define([
+  'libs/backbone/backbone-forms.amd',
 
-  var Form = Backbone.Form,
+],function(bf) {
+
+  var Form = bf,
       editors = Form.editors;
 
   /**
@@ -450,4 +453,4 @@
     isAsync: true
   });
 
-})();
+});

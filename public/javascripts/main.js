@@ -9,6 +9,7 @@ require.config({
       jquery:'libs/jquery/jquery-min',
       underscore:'libs/underscore/underscore',
       Backbone:'libs/backbone/backbone',
+      //'Form':'libs/backbone/list'
 	}
 });
 

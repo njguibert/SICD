@@ -2,36 +2,30 @@
 define([
   'views/home/main',
   'views/devices/main',
-  'views/devices/new',
+  'views/devices/abm',
   'views/options/list',
   'views/clients/list',
   'bootstrap',
-], function(mainHomeView,deviceMainView,deviceNewView,optionListView,clientListView){
+], function(mainHomeView,deviceMainView,deviceABMView,optionListView,clientListView){
     var AppRouter = Backbone.Router.extend({
       routes:{
         '': 'loadpage',
         'clientes': 'showClients',
         'clientes/new': 'newClients',
         'devices': 'showDevices',
-        'devices/new': 'newDevices',
+        'devicesABM': 'showABMDevices',
         },
-        loadpage:function(){
-          //optionListView.render();
+        loadpage:function(){ //Muestro HomePage
           mainHomeView.render();
-          //alert("inicio");
         },
-        showClients:function(){
+        showClients:function(){ //Muestro Clientes
           clientListView.render();
-          //alert("muestro clientes");
         },
-        newClients:function(){
-          //alert("Creo el cliente");
-        },
-        showDevices:function(){
+        showDevices:function(){ //Muestro Devices
           deviceMainView.render();
         },
-        newDevices:function(){
-          //deviceNewView.render();
+        showABMDevices:function(){
+          deviceABMView.render();
         },
         defaultAction:function(actions){
           //mainHomeView.render();

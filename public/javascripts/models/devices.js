@@ -9,7 +9,7 @@ define([
 			schema:{
 				nombre: 	'Text',
 				descripcion: 	'Text',
-				//caracteristicas:      { type: 'List' },
+				caracteristicas:      { type: 'List', itemType: 'Text' },
 			}	
 		});
 		return devicesModel;

@@ -34,9 +34,11 @@ app.get('/sistema',routes.sistema);
 app.get('/collection/options/',routes.getOptions);
 app.get('/collection/clients/',routes.getClients);
 app.get('/collection/devices/',routes.getDevices);
+app.get('/collection/generic/:nombredispositivo',routes.getDevicesGeneric);//Obtengo una coleccion generica.
 app.post('/collection/devices/',routes.addDevice);
 app.post('/model/client/new',routes.clientnew);
-app.post('/model/device/new',routes.devicenew);
+app.post('/model/device/new',routes.devicenew); //Almacena un modelo de device
+app.post('/device/new/:nombredispositivo',routes.devicenewreg)//Almacena un registro de device
 var port = process.env.PORT || 3000;
 app.listen(port, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

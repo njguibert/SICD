@@ -3,6 +3,7 @@ define([
   'text!templates/devices/template.html',
   'views/devices/list',
   'views/devices/new',
+  'libs/backbone/adapter/backbone.bootstrap-modal'
 ],function(devicesCollection,deviceTemplate,deviceListF,deviceNewView){
   //Vista principal Dispositivos
   var deviceMainView=Backbone.View.extend({
@@ -11,10 +12,7 @@ define([
     },
     el: $("#page"),
     initialize: function(){
-      this.collection=devicesCollection;
-      devicesCollection.fetch();
-      self=this;
-      this.collection.bind("add", function() {self.renderone();});
+
     },
     renderfrmnuevo:function(){
       //Creo la vista del formulario
@@ -22,12 +20,15 @@ define([
       deviceForm.render();
       $('#frmnuevodispositivo').modal();
       $('#frmnuevodispositivo').on('hidden', function () {
-        //alert("se cerro");
         $('#frmnuevodispositivo').unbind('hidden');
         deviceForm.removebind();
       });
     },
     render:function(){
+      this.collection=devicesCollection;
+      devicesCollection.fetch();
+      self=this;
+      this.collection.bind("add", function() {self.renderone();});      
     	var compiledTemplate = _.template(deviceTemplate);
     	$("#page").html(compiledTemplate);
       //Creo la vista del listado

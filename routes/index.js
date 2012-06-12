@@ -10,34 +10,40 @@ var Popciones = [
   {
     nombre: 'Dispositivos',
     url: '/devices',
+  },
+  {
+    nombre: '@Dispositivos',
+    url: '/devicesABM',
   },  
 ];
 var Pclientes=[
-{
-  nombre: 'SuperStar Hiper',
-  telefono:2333,
-},
-{
-  nombre: 'Casa Angelito',
-  telefono:34513,
-},
-{
-  nombre: 'Latina FM',
-  telefono:85913,
-},
-{
-  nombre: 'AutoServices Nataleo',
-  telefono:2333,
-}
+  {
+    nombre: 'SuperStar Hiper',
+    telefono:2333,
+  },
+  {
+    nombre: 'Casa Angelito',
+    telefono:34513,
+  },
+  {
+    nombre: 'Latina FM',
+    telefono:85913,
+  },
+  {
+    nombre: 'AutoServices Nataleo',
+    telefono:2333,
+  }
 ];
 var Pdevices = [
   {
     nombre: 'CPU',
     descripcion: 'procesador pc',
+    caracteristicas: ['Tipo','BUS']
   },
   {
     nombre: 'Alfajor',
     descripcion: 'un alfajorcito!',
+    caracteristicas: ['Codigo','Marca','Gusto','Color']
   },  
 ];
 
@@ -81,6 +87,21 @@ exports.devicenew=function(req,res){
   console.log("Nuevo Dispositivo");
   console.log("Nombre: " +req.body.nombre);
   console.log("Descripcion:" + req.body.descripcion);
+  console.log("Caracteristicas:" + req.body.caracteristicas);
+  var d={
+    nombre: req.body.nombre,
+    descripcion: req.body.descripcion,
+    caracteristicas: req.body.caracteristicas
+  }
+  Pdevices.push(d);
   res.json({estado:true});
 }
-
+exports.devicenewreg=function(req,res){
+  nombre=req.params.nombredispositivo;
+  console.log("Guardo un nuevo registro de devices nombre:" + nombre);
+  res.json({estado:true});
+}
+exports.getDevicesGeneric=function(req,res){ //Retorna una coleccion generica de datos
+  console.log("Retorno la coleccion generica:" + req.params.nombredispositivo);
+  res.json({estado:true});
+}
