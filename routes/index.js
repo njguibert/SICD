@@ -36,9 +36,14 @@ var Pclientes=[
 ];
 var Pdevices = [
   {
-    nombre: 'CPU',
-    descripcion: 'procesador pc',
-    caracteristicas: ['Tipo','BUS']
+    nombre: 'Computadora',
+    descripcion: 'Arquitectura Computadora',
+    caracteristicas: ['Cpu','Motherboard','Memoria','Disco','Monitor','Parlantes']
+  },
+  {
+    nombre: 'Impresora',
+    descripcion: 'Arquitectura Impresora',
+    caracteristicas: ['Nro Serie','Marca','Modelo','Tipo']
   },
   {
     nombre: 'Alfajor',
