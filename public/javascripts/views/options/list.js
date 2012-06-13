@@ -3,7 +3,7 @@ define([
   'text!templates/options/list.html'
 ],function(optionsCollection,optionsListTemplate){
   var optionListView=Backbone.View.extend({
-    el: "#sidebar-opciones",
+    el: "#topbar",
     initialize: function(){
     	this.collection=optionsCollection;
       optionsCollection.fetch();

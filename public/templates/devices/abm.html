@@ -3,8 +3,14 @@
   
   <div id='contenido'>
     <div class='span3'>
-      <div id='ABMlistdevices'><table class="table table-striped" id='listdevicetable'><tr><th>Nombre</th></tr></table></div>
+      <div id='ABMlistdevices'><table class="table table-striped" id='listdevicetable'><thead><tr><th>Nombre</th></tr></thead><tbody></tbody></table></div>
     </div>
-    <div class='span6'><div id='ABM'><div id='formulario'></div></div></div>
+    <div class='span6'>
+    	<div id='ABM'> 
+			<a href='#formulario' id='frmnew' > <i class='icon-file'></i>Nuevo Dispositivo</a>
+    		<div id='formulario' class='modal hide fade in'></div>
+    		<div id='listado'></div>
+    	</div>
+    </div>
   </div>
 </div>

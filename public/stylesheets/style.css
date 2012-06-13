@@ -18,5 +18,8 @@ a {
 #frmnuevodevice form{
 	overflow-y: auto;
 }
+#listado{
+	margin-top: 20px;
+}
 
 
