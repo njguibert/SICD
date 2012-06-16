@@ -9,11 +9,11 @@ var DATA={
                 url: '/clientes',
               },
               {
-                nombre: 'Dispositivos',
+                nombre: 'Productos',
                 url: '/devices',
               },
               {
-                nombre: '@Dispositivos',
+                nombre: '@Productos',
                 url: '/devicesABM',
               }],
   clientes:[{
@@ -47,12 +47,16 @@ var DATA={
               nombre: 'Alfajor',
               descripcion: 'un alfajorcito!',
               caracteristicas: ['Codigo','Marca','Gusto','Color']
-            },  
+            },
           ],
   devicesDATA:[{
     nombre:'Alfajor',
-    registros:[{Codigo:'111',Marca:'Milka',Gusto:'Chocolate',Color:'Negro'},{Codigo:'222',Marca:'Portezuelo',Gusto:'Chocolate',Color:'Negro'}]
-  }]
+    registros:[{Codigo:'111',Marca:'Milka',Gusto:'Chocolate',Color:'Negro',id:1},{Codigo:'222',Marca:'Portezuelo',Gusto:'Chocolate',Color:'Negro',id:2}]
+  },{
+    nombre:'Impresora',
+    registros:[{'Nro Serie':'HC111',Marca:'Epson',Modelo:'LX300',Tipo:'Matrizial',id:1}]
+  }
+  ]
 }
 
 exports.index = function(req, res){
@@ -99,9 +103,41 @@ exports.devicenew=function(req,res){
 exports.devicenewreg=function(req,res){
   nombre=req.params.nombredispositivo;
   console.log("Guardo un nuevo registro de devices nombre:" + nombre);
+  var producto = _(DATA.devicesDATA).detect(function(p) {
+    return p.nombre == nombre;
+  });
+
+  if (typeof(producto) != "undefined"){
+  req.body.id=producto.registros.length+1;
+  producto.registros.push(req.body); //agrego el producto ingresado
+
+  }
   res.json({estado:true});
 }
 
+exports.deviceeditreg=function(req,res){
+  nombre=req.params.nombredispositivo;
+  console.log("Edito un nuevo registro de devices nombre:" + nombre);
+
+  var producto = _(DATA.devicesDATA).detect(function(p) {
+    return p.nombre == req.params.nombredispositivo;
+  });
+  if (typeof(producto) != "undefined"){
+  var registro = _(producto.registros).detect(function(p) {
+    //return p.id == req.params.idd;
+    if (p.id == req.params.idd){
+      producto.registros[p]=req.body;
+      //p=req.body;
+      console.log(producto.registros[p]);
+      //console.log(req.body);
+    }
+  });
+
+//  req.body.id=producto.registros.length+1;
+  //producto.registros.push(req.body);
+  res.json({estado:true});
+  }
+}
 exports.getDevicesGeneric=function(req,res){ //Retorna una coleccion generica de datos
   console.log("Retorno la coleccion generica:" + req.params.nombredispositivo);
 
@@ -116,4 +152,20 @@ exports.getDevicesGeneric=function(req,res){ //Retorna una coleccion generica de
   else{
     res.json({estado:true});
   }
+}
+
+exports.devicedeletereg=function(req,res){
+  console.log("Elimino el device:" + req.params.idd);
+  
+  var producto = _(DATA.devicesDATA).detect(function(p) {
+    return p.nombre == req.params.nombredispositivo;
+  });
+  if (typeof(producto) != "undefined"){
+  var registro = _(producto.registros).detect(function(p) {
+    return p.id == req.params.idd;
+  });
+  producto.registros.pop(registro); //Elimino el registro de la coleccion
+  res.json({estado:true});
+  }
+  
 }

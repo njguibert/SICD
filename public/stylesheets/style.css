@@ -13,13 +13,14 @@ a {
 	overflow-y: auto;height:100px;
 }
 #listdevices{
-	overflow-y: auto;height:150px;
+	overflow-y: auto;height:400px;
 }
 #frmnuevodevice form{
 	overflow-y: auto;
 }
 #listado{
 	margin-top: 20px;
+	overflow-y: auto;height:400px
 }
 
 
