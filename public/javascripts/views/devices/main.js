@@ -28,7 +28,7 @@ define([
       this.collection=devicesCollection;
       devicesCollection.fetch();
       self=this;
-      this.collection.bind("add", function() {self.renderone();});      
+      //this.collection.bind("add", function() {self.renderone();});      
     	var compiledTemplate = _.template(deviceTemplate);
     	$("#page").html(compiledTemplate);
       //Creo la vista del listado

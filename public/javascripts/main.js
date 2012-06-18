@@ -1,5 +1,4 @@
 require.config({
-	//waitSeconds: 15,
 	paths:{
       text: 'libs/require/text',
       async: 'libs/require/async',

@@ -15,6 +15,10 @@ var DATA={
               {
                 nombre: '@Productos',
                 url: '/devicesABM',
+              },
+              {
+                nombre: 'Secciones',
+                url: '/secciones',
               }],
   clientes:[{
               nombre: 'SuperStar Hiper',
@@ -56,7 +60,39 @@ var DATA={
     nombre:'Impresora',
     registros:[{'Nro Serie':'HC111',Marca:'Epson',Modelo:'LX300',Tipo:'Matrizial',id:1}]
   }
-  ]
+  ],
+  secciones:[{
+    id:1,
+    nombre:'SHOPPING',
+    descripcion:'Sucursal Central',
+    padre:false,
+    hijos:[5]
+  },
+  {
+    id:2,
+    nombre:'HIPERCENTRO',
+    descripcion:'El Hiper',
+    padre:false,
+    hijos:[]
+  },{
+    id:3,
+    nombre:'PLAZA',
+    descripcion:'El plaza',
+    padre:false,
+    hijos:[]
+  },{
+    id:4,
+    nombre:'NORTE',
+    descripcion:'El norte',
+    padre:false,
+    hijos:[]
+  },{
+    id:5,
+    nombre:'TALLER',
+    descripcion:'Taller de Jesus', 
+    padre:1,
+    hijos:[]
+  }],
 }
 
 exports.index = function(req, res){
@@ -167,5 +203,57 @@ exports.devicedeletereg=function(req,res){
   producto.registros.pop(registro); //Elimino el registro de la coleccion
   res.json({estado:true});
   }
-  
 }
+exports.seccionnew=function(req,res){
+  console.log("Ingreso nueva seccion");
+  console.log(req.body.padre);
+  if(req.body.padre){ //Si viene con el padre seteado se lo agrego
+    req.body.id=DATA.secciones.length+1;
+    DATA.secciones.push(req.body);
+  _(DATA.secciones).detect(function(p) {
+    if(p.id==req.body.padre){
+      //secciones.push(p);
+      console.log("padre:");
+      console.log(p);
+      p.hijos.push(req.body.id);
+    }
+  });    
+  }else{
+    req.body.hijos=[];
+    req.body.id=DATA.secciones.length+1;
+    DATA.secciones.push(req.body);
+  }
+
+  res.json({estado:true});
+}
+exports.getSeccion=function(req,res){
+  console.log("Retorno la coleccion de secciones que no tengan padres");
+  var secciones=[];
+  _(DATA.secciones).detect(function(p) {
+    if(p.padre==false){
+      secciones.push(p);
+    }
+  });
+  res.json(secciones);
+}
+exports.getSeccionID=function(req,res){
+  console.log("Retorno la coleccion de secciones del ID:" + req.params.id);
+
+  var seccion=_(DATA.secciones).detect(function(p) { //Obtengo la seccion
+    return p.id == req.params.id;
+  });
+
+  var secciones=[];
+  _(seccion.hijos).detect(function(seccion) { //Recorro los hijos de una seccion
+  _(DATA.secciones).detect(function(hijo) {
+    if ( hijo.id == seccion){
+      console.log(hijo);
+      secciones.push(hijo); //Agrego la seccion a la coleccion a retornar
+    }
+  });    
+  });
+
+  res.json(secciones);
+}
+
+

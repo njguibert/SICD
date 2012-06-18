@@ -34,9 +34,12 @@ app.get('/collection/options/',routes.getOptions);
 app.get('/collection/clients/',routes.getClients);
 app.get('/collection/devices/',routes.getDevices);
 app.get('/collection/generic/:nombredispositivo',routes.getDevicesGeneric);//Obtengo una coleccion generica.
+app.get('/collection/seccion/',routes.getSeccion); //Obtengo las secciones exitentes
+app.get('/collection/seccion/:id',routes.getSeccionID); //Obtengo las secciones de una determinada id
 app.post('/collection/devices/',routes.addDevice);
 app.post('/model/client/new',routes.clientnew);
 app.post('/model/device/new',routes.devicenew); //Almacena un modelo de device
+app.post('/model/seccion',routes.seccionnew); //Almacena una seccion
 app.post('/device/:nombredispositivo',routes.devicenewreg)//Almacena un registro de device
 app.put('/device/:nombredispositivo/:idd',routes.deviceeditreg)//Modifica un registro de device
 app.delete('/device/:nombredispositivo/:idd',routes.devicedeletereg)//Elimina un registro de device

@@ -5,15 +5,16 @@ define([
   'views/devices/abm',
   'views/options/list',
   'views/clients/list',
+  'views/secciones/main',
   'bootstrap',
-], function(mainHomeView,deviceMainView,deviceABMView,optionListView,clientListView){
+], function(mainHomeView,deviceMainView,deviceABMView,optionListView,clientListView,seccionMainView){
     var AppRouter = Backbone.Router.extend({
       routes:{
         '': 'loadpage',
         'clientes': 'showClients',
-        'clientes/new': 'newClients',
         'devices': 'showDevices',
         'devicesABM': 'showABMDevices',
+        'secciones': 'showSecciones',
         },
         loadpage:function(){ //Muestro HomePage
           mainHomeView.render();
@@ -26,6 +27,9 @@ define([
         },
         showABMDevices:function(){
           deviceABMView.render();
+        },
+        showSecciones:function(){
+          seccionMainView.render();
         },
         defaultAction:function(actions){
           //mainHomeView.render();
