@@ -16,7 +16,8 @@ define([
     },
     renderfrmnuevo:function(){
       //Creo la vista del formulario
-      var seccionForm= new seccionNewView();
+      self=this;
+      var seccionForm= new seccionNewView({collection:self.collection});
       seccionForm.render();
       $('#frmnuevaseccion').modal();
       $('#frmnuevaseccion').on('hidden', function () {
@@ -25,7 +26,7 @@ define([
       });
     },      
     render:function(){
-      //this.collection=seccionesCollection;
+      this.collection=seccionesCollection;
       //seccionesCollection.bind("add", this.renderone()); 
       seccionesCollection.fetch({success:this.respuesta});
       var compiledTemplate = _.template(mainTemplate);

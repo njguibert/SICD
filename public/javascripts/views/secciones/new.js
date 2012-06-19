@@ -40,13 +40,15 @@ define([
       var errors=this.form.commit();
       if (this.padre!= false){
         this.device.set({'padre':this.padre});  //Si la seccion tiene padre, ya se la seteo
-        //alert("tiene padre");
       }      
       //Guardo el objeto en la BD
       self=this;
+      //alert(JSON.stringify(self.collection));
+      
       this.device.save({},{
        success:function(){
         //self.render();
+        self.collection.add(self.device);
         $('#frmnuevaseccion').modal('hide');
         }
       });

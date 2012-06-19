@@ -11,7 +11,7 @@ define([
     },      
     el: '#seccion',
     initialize:function(){
-      _.bindAll(this,'render','renderlistado','respuesta','renderfrmnuevo');
+      _.bindAll(this,'render','renderlistado','respuesta','renderfrmnuevo','renderone');
       $(this.el).undelegate('#frmnewsubseccion', 'click');
       this.idpadre;
     },
@@ -19,17 +19,22 @@ define([
       //$(this.el).html("<h1>Seccion:"+this.model.get("nombre")+"</h1");
       //$(this.el).append("<a href='#frmnuevaseccion' id='frmnewsubseccion' > <i class='icon-file'></i>Nueva SubSeccion</a>");
       this.collection=genericCollection; //Coleccion Generica
+      this.collection.unbind('add');
+      this.collection.bind('add', this.renderone);
       genericCollection.url='/collection/seccion/'+ this.model.get("id"); //Setea tipo generico
       genericCollection.fetch({success:this.respuesta}); //cuando retornen los resultados ejecuto la funcion
       this.idpadre= this.model.get("id"); 
-      
+    },
+    renderone:function(){
+      alert("wily");
+      this.renderlistado();
     },
     renderfrmnuevo:function(){
       //Creo la vista del formulario
-      var seccionForm= new seccionNewView();
+      self=this;
+      var seccionForm= new seccionNewView({collection:self.collection});
       seccionForm.setPadre(this.idpadre);
       seccionForm.render();
-      self=this;
       $('#frmnuevaseccion').modal();
       $('#frmnuevaseccion').on('hidden', function () {
         $('#frmnuevaseccion').unbind('hidden');
@@ -59,17 +64,16 @@ define([
         },
         edit:function(){
           //alert("id:"+ this.model.get("id"));
-          //alert("padre:"+self.model.get("id"));
           self.idpadre=this.model.get("id");
-          //self.model.set({id:idpadre});
           genericCollection.url='/collection/seccion/'+ this.model.get("id"); //Setea tipo generico
-          genericCollection.fetch({success:self.respuesta}); //cuando retornen los resultados ejecuto la funcion                 
+          genericCollection.fetch({success:self.respuesta}); //cuando retornen los resultados ejecuto la funcion
+          self.model=this.model;                 
         }
       });
       $(this.el).html("<h1>Seccion:"+this.model.get("nombre")+"</h1");
       $(this.el).append("<a href='#frmnuevaseccion' id='frmnewsubseccion' > <i class='icon-file'></i>Nueva SubSeccion</a>");
       $(this.el).append("<table class='table table-bordered' id='listadotabla'><tbody></tbody></table>");
-      _(genericCollection.models).each(function (d){ //Renderizo las subsecciones
+      _(self.collection.models).each(function (d){ //Renderizo las subsecciones
       var DeviceVista=new RegView({model:d});
       $('#listadotabla tbody',self.el).append(DeviceVista.render().el); 
       });
@@ -93,7 +97,6 @@ define([
       
       var NavegadorSecciones= new NavView({model:this.model});
       NavegadorSecciones.render();
-      //$('#frmeditardispositivo').modal();
     }
   });
 

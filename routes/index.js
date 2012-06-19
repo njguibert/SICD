@@ -209,6 +209,7 @@ exports.seccionnew=function(req,res){
   console.log(req.body.padre);
   if(req.body.padre){ //Si viene con el padre seteado se lo agrego
     req.body.id=DATA.secciones.length+1;
+    req.body.hijos=[];
     DATA.secciones.push(req.body);
   _(DATA.secciones).detect(function(p) {
     if(p.id==req.body.padre){
@@ -223,7 +224,8 @@ exports.seccionnew=function(req,res){
     req.body.id=DATA.secciones.length+1;
     DATA.secciones.push(req.body);
   }
-
+  console.log("Persistencia:");
+  console.log(DATA.secciones);
   res.json({estado:true});
 }
 exports.getSeccion=function(req,res){
