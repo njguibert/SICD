@@ -20,7 +20,8 @@ define([
       //$(this.el).append("<a href='#frmnuevaseccion' id='frmnewsubseccion' > <i class='icon-file'></i>Nueva SubSeccion</a>");
       this.collection=genericCollection; //Coleccion Generica
       genericCollection.url='/collection/seccion/'+ this.model.get("id"); //Setea tipo generico
-      genericCollection.fetch({success:this.respuesta}); //cuando retornen los resultados ejecuto la funcion       
+      genericCollection.fetch({success:this.respuesta}); //cuando retornen los resultados ejecuto la funcion
+      this.idpadre= this.model.get("id"); 
       
     },
     renderfrmnuevo:function(){
@@ -41,6 +42,7 @@ define([
     },
     renderlistado:function(){
 
+      //alert(JSON.stringify(genericCollection));
       self=this;
 
       var RegView=Backbone.View.extend({

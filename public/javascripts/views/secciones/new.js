@@ -46,7 +46,8 @@ define([
       self=this;
       this.device.save({},{
        success:function(){
-        //self.render();   
+        //self.render();
+        $('#frmnuevaseccion').modal('hide');
         }
       });
     },
