@@ -41,7 +41,6 @@ define([
     },
     renderlistado:function(){
 
-      alert(JSON.stringify(genericCollection));
       self=this;
 
       var RegView=Backbone.View.extend({
