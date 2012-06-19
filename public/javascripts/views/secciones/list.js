@@ -12,20 +12,21 @@ define([
     el: '#seccion',
     initialize:function(){
       _.bindAll(this,'render','renderlistado','respuesta','renderfrmnuevo');
+      $(this.el).undelegate('#frmnewsubseccion', 'click');
+      this.idpadre;
     },
     render:function(){
-      $(this.el).html("<h1>Seccion:"+this.model.get("nombre")+"</h1");
-      $(this.el).append("<a href='#frmnuevaseccion' id='frmnewsubseccion' > <i class='icon-file'></i>Nueva SubSeccion</a>");
+      //$(this.el).html("<h1>Seccion:"+this.model.get("nombre")+"</h1");
+      //$(this.el).append("<a href='#frmnuevaseccion' id='frmnewsubseccion' > <i class='icon-file'></i>Nueva SubSeccion</a>");
       this.collection=genericCollection; //Coleccion Generica
       genericCollection.url='/collection/seccion/'+ this.model.get("id"); //Setea tipo generico
       genericCollection.fetch({success:this.respuesta}); //cuando retornen los resultados ejecuto la funcion       
       
     },
     renderfrmnuevo:function(){
-      alert("Renderizo nuevo form");
       //Creo la vista del formulario
       var seccionForm= new seccionNewView();
-      seccionForm.setPadre(this.model.get("id"));
+      seccionForm.setPadre(this.idpadre);
       seccionForm.render();
       self=this;
       $('#frmnuevaseccion').modal();
@@ -40,29 +41,37 @@ define([
     },
     renderlistado:function(){
 
+      alert(JSON.stringify(genericCollection));
+      self=this;
+
       var RegView=Backbone.View.extend({
         tagName: 'tr',
         events:{
           'click td' : 'edit', //Al hacer click creo el formulario con los datos asociados
         },
         initialize:function(){
+          _.bindAll(this,'render','edit');
         },
         render:function(){
           $(this.el).append("<td>" + this.model.get('nombre')+ "</td>");
           return this;
         },
         edit:function(){
-          alert("hiciste click en una subseccion");
+          //alert("id:"+ this.model.get("id"));
+          //alert("padre:"+self.model.get("id"));
+          self.idpadre=this.model.get("id");
+          //self.model.set({id:idpadre});
+          genericCollection.url='/collection/seccion/'+ this.model.get("id"); //Setea tipo generico
+          genericCollection.fetch({success:self.respuesta}); //cuando retornen los resultados ejecuto la funcion                 
         }
       });
-      self=this;
+      $(this.el).html("<h1>Seccion:"+this.model.get("nombre")+"</h1");
+      $(this.el).append("<a href='#frmnuevaseccion' id='frmnewsubseccion' > <i class='icon-file'></i>Nueva SubSeccion</a>");
       $(this.el).append("<table class='table table-bordered' id='listadotabla'><tbody></tbody></table>");
       _(genericCollection.models).each(function (d){ //Renderizo las subsecciones
       var DeviceVista=new RegView({model:d});
       $('#listadotabla tbody',self.el).append(DeviceVista.render().el); 
       });
-
-
     }
   });
   //Vista Item seccion

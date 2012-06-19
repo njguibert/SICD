@@ -40,7 +40,7 @@ define([
       var errors=this.form.commit();
       if (this.padre!= false){
         this.device.set({'padre':this.padre});  //Si la seccion tiene padre, ya se la seteo
-        alert("tiene padre");
+        //alert("tiene padre");
       }      
       //Guardo el objeto en la BD
       self=this;
@@ -54,7 +54,6 @@ define([
       this.padre=idpadre;
     },
     removebind:function(){
-      alert("unbind");
       $(this.el).undelegate('#newdevice', 'click');
     }
   });
